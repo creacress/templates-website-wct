@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Templates Website - WCT</title>
+    <meta name="description" content="Collection de 11 templates de sites web professionnels par WebCresson Tech">
+    <meta property="og:title" content="Templates Website - WCT">
+    <meta property="og:description" content="Collection de 11 templates de sites web professionnels">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://templates-website-wct.vercel.app">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -30,8 +35,8 @@
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 24px;
             max-width: 1200px;
             width: 100%;
         }
@@ -40,28 +45,51 @@
             background: #151515;
             border: 1px solid #252525;
             border-radius: 12px;
-            padding: 30px;
             text-decoration: none;
             color: #fff;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
         a.card:hover {
             border-color: #667eea;
             transform: translateY(-4px);
             box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
         }
-        .card h2 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
+        .preview {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: #1a1a1a;
         }
-        .card span {
+        .preview iframe {
+            width: 1440px;
+            height: 900px;
+            border: none;
+            transform: scale(0.25);
+            transform-origin: top left;
+            pointer-events: none;
+        }
+        .card-info {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-info h2 {
+            font-size: 1.1rem;
+        }
+        .card-info span {
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
-        .card .arrow {
-            float: right;
+        .arrow {
             font-size: 1.3rem;
             color: #667eea;
+        }
+        @media (max-width: 480px) {
+            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -70,59 +98,48 @@
     <p class="subtitle">Collection de 11 templates par WCT</p>
     <div class="grid">
         <a class="card" href="/demo-E-commerce/">
-            <span class="arrow">→</span>
-            <h2>E-commerce</h2>
-            <span>Boutique en ligne</span>
+            <div class="preview"><iframe src="/demo-E-commerce/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>E-commerce</h2><span>Boutique en ligne</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-animalerie/">
-            <span class="arrow">→</span>
-            <h2>Animalerie</h2>
-            <span>Commerce d'animaux</span>
+            <div class="preview"><iframe src="/demo-animalerie/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Animalerie</h2><span>Commerce d'animaux</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-avocats/">
-            <span class="arrow">→</span>
-            <h2>Avocats</h2>
-            <span>Cabinet d'avocats</span>
+            <div class="preview"><iframe src="/demo-avocats/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Avocats</h2><span>Cabinet d'avocats</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-cabinet-RH/">
-            <span class="arrow">→</span>
-            <h2>Cabinet RH</h2>
-            <span>Ressources humaines</span>
+            <div class="preview"><iframe src="/demo-cabinet-RH/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Cabinet RH</h2><span>Ressources humaines</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-fleuriste/">
-            <span class="arrow">→</span>
-            <h2>Fleuriste</h2>
-            <span>Boutique florale</span>
+            <div class="preview"><iframe src="/demo-fleuriste/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Fleuriste</h2><span>Boutique florale</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-immobilier/">
-            <span class="arrow">→</span>
-            <h2>Immobilier</h2>
-            <span>Agence immobilière</span>
+            <div class="preview"><iframe src="/demo-immobilier/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Immobilier</h2><span>Agence immobilière</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-photographe/">
-            <span class="arrow">→</span>
-            <h2>Photographe</h2>
-            <span>Portfolio photo</span>
+            <div class="preview"><iframe src="/demo-photographe/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Photographe</h2><span>Portfolio photo</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-plombier/">
-            <span class="arrow">→</span>
-            <h2>Plombier</h2>
-            <span>Artisan plombier</span>
+            <div class="preview"><iframe src="/demo-plombier/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Plombier</h2><span>Artisan plombier</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-restaurant/">
-            <span class="arrow">→</span>
-            <h2>Restaurant</h2>
-            <span>Restauration</span>
+            <div class="preview"><iframe src="/demo-restaurant/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Restaurant</h2><span>Restauration</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-saas/">
-            <span class="arrow">→</span>
-            <h2>SaaS</h2>
-            <span>Application SaaS</span>
+            <div class="preview"><iframe src="/demo-saas/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>SaaS</h2><span>Application SaaS</span></div><span class="arrow">→</span></div>
         </a>
         <a class="card" href="/demo-tech/">
-            <span class="arrow">→</span>
-            <h2>Tech</h2>
-            <span>Entreprise tech</span>
+            <div class="preview"><iframe src="/demo-tech/" loading="lazy" tabindex="-1"></iframe></div>
+            <div class="card-info"><div><h2>Tech</h2><span>Entreprise tech</span></div><span class="arrow">→</span></div>
         </a>
     </div>
 </body>
