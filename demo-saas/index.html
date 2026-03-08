@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlanSync — Gestion de projet simplifiée pour les équipes modernes</title>
+<meta name="description" content="PlanSync centralise vos projets, tâches et communications. L'outil tout-en-un qui remplace Trello, Notion et Slack. Essai gratuit 14 jours.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#09090b;--surface:#18181b;--surface-2:#27272a;--border:#3f3f46;--text:#fafafa;--muted:#a1a1aa;--emerald:#10b981;--emerald-glow:rgba(16,185,129,0.12);--teal:#14b8a6;--amber:#f59e0b;--font:'Manrope',sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--text);background:var(--bg);overflow-x:hidden;line-height:1.6}
+
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(9,9,11,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(63,63,70,0.4)}
+.logo{font-size:1.4rem;font-weight:800;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.logo-icon{width:28px;height:28px;background:var(--emerald);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:var(--bg)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.88rem;font-weight:500;transition:color .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-btns{display:flex;gap:.8rem;align-items:center}
+.nav-login{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500}
+.nav-login:hover{color:var(--text)}
+.btn-em{background:var(--emerald);color:var(--bg);padding:.55rem 1.3rem;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:700;transition:all .3s}
+.btn-em:hover{box-shadow:0 0 30px var(--emerald-glow);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:10%;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,var(--emerald-glow) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:.78rem;font-weight:600;color:var(--emerald);margin-bottom:1.5rem}
+.hero-badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:p 2s ease infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.8rem,5.5vw,4.5rem);font-weight:800;line-height:1.05;margin-bottom:1.2rem;letter-spacing:-.04em}
+.hero h1 .em{background:linear-gradient(135deg,var(--emerald),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.1rem;color:var(--muted);max-width:560px;margin:0 auto 2rem;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-big{background:var(--emerald);color:var(--bg);padding:1rem 2.2rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:.95rem;transition:all .3s;box-shadow:0 4px 20px var(--emerald-glow)}
+.btn-big:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(16,185,129,.25)}
+.btn-ghost{border:1px solid var(--border);color:var(--text);padding:1rem 2.2rem;border-radius:10px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .3s}
+.btn-ghost:hover{border-color:var(--emerald);color:var(--emerald)}
+.hero-proof{display:flex;justify-content:center;gap:2rem;margin-top:3rem;flex-wrap:wrap}
+.proof-item{font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:.4rem}
+.proof-item strong{color:var(--text)}
+
+.app-preview{max-width:1000px;margin:-2rem auto 0;padding:0 2rem;position:relative;z-index:2}
+.app-window{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.4)}
+.app-bar{display:flex;align-items:center;gap:.5rem;padding:.8rem 1.2rem;background:var(--surface-2);border-bottom:1px solid var(--border)}
+.app-dot{width:10px;height:10px;border-radius:50%;background:var(--border)}
+.app-dot:first-child{background:#ef4444}.app-dot:nth-child(2){background:#f59e0b}.app-dot:nth-child(3){background:#22c55e}
+.app-body{padding:2rem;min-height:300px;display:grid;grid-template-columns:200px 1fr 250px;gap:1.5rem}
+.app-sidebar{display:flex;flex-direction:column;gap:.5rem}
+.app-sidebar-item{padding:.5rem .8rem;border-radius:8px;font-size:.8rem;color:var(--muted);cursor:default;transition:all .2s}
+.app-sidebar-item.active{background:var(--emerald-glow);color:var(--emerald);font-weight:600}
+.app-main{display:flex;flex-direction:column;gap:1rem}
+.app-col-title{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-bottom:.3rem}
+.app-task{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.8rem;font-size:.82rem;color:var(--text)}
+.app-task-tag{display:inline-block;padding:.15rem .5rem;border-radius:4px;font-size:.65rem;font-weight:600;margin-top:.4rem}
+.tag-green{background:rgba(16,185,129,.15);color:var(--emerald)}
+.tag-amber{background:rgba(245,158,11,.15);color:var(--amber)}
+.tag-blue{background:rgba(59,130,246,.15);color:#3b82f6}
+.app-right{display:flex;flex-direction:column;gap:1rem}
+.app-stat-mini{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.8rem}
+.app-stat-mini .val{font-size:1.3rem;font-weight:800;color:var(--emerald)}
+.app-stat-mini .lbl{font-size:.72rem;color:var(--muted)}
+
+.logos{padding:4rem 2rem;text-align:center;border-bottom:1px solid rgba(63,63,70,.3)}
+.logos p{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1.5rem}
+.logos-row{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;opacity:.4}
+.logos-row span{font-size:1rem;font-weight:700;letter-spacing:.03em}
+
+.features{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+.s-label{font-size:.75rem;font-weight:700;color:var(--emerald);text-transform:uppercase;letter-spacing:.2em;margin-bottom:.5rem}
+.s-title{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;margin-bottom:.8rem;letter-spacing:-.03em}
+.s-sub{color:var(--muted);max-width:500px;margin-bottom:3rem}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all .3s}
+.feat-card:hover{border-color:rgba(16,185,129,.3);transform:translateY(-3px)}
+.feat-icon{width:44px;height:44px;border-radius:10px;background:var(--emerald-glow);border:1px solid rgba(16,185,129,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem}
+.feat-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
+.feat-card p{font-size:.88rem;color:var(--muted);line-height:1.6}
+
+.pricing{padding:6rem 2rem;background:var(--surface)}
+.pricing-inner{max-width:1000px;margin:0 auto;text-align:center}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.price-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:2.5rem 2rem;text-align:left;position:relative;transition:all .3s}
+.price-card.pop{border-color:var(--emerald);box-shadow:0 0 40px var(--emerald-glow)}
+.price-pop-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--emerald);color:var(--bg);padding:.25rem 1rem;border-radius:100px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.price-name{font-size:.85rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+.price-amount{font-size:2.8rem;font-weight:800;margin:.5rem 0;letter-spacing:-.04em}
+.price-amount span{font-size:1rem;font-weight:500;color:var(--muted)}
+.price-desc{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.5}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.price-features li{font-size:.88rem;color:var(--muted);display:flex;align-items:center;gap:.5rem}
+.price-features li::before{content:'✓';color:var(--emerald);font-weight:700;font-size:.8rem}
+.price-btn{display:block;text-align:center;padding:.9rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:.9rem;transition:all .3s}
+.price-btn-outline{border:1px solid var(--border);color:var(--text)}
+.price-btn-outline:hover{border-color:var(--emerald);color:var(--emerald)}
+.price-btn-fill{background:var(--emerald);color:var(--bg)}
+.price-btn-fill:hover{box-shadow:0 8px 30px var(--emerald-glow)}
+
+.faq{padding:6rem 2rem;max-width:700px;margin:0 auto}
+.faq-list{margin-top:2rem;display:flex;flex-direction:column;gap:.6rem}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-q{width:100%;padding:1.1rem 1.3rem;background:none;border:none;font-family:var(--font);font-size:.92rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--emerald);transition:transform .3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:0 1.3rem 1.1rem;font-size:.88rem;color:var(--muted);line-height:1.6}
+
+.cta-final{padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
+.cta-final::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50vw;height:50vw;border-radius:50%;background:radial-gradient(circle,var(--emerald-glow),transparent 60%)}
+.cta-box{max-width:600px;margin:0 auto;position:relative;z-index:2}
+.cta-box h2{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;margin-bottom:.8rem;letter-spacing:-.03em}
+.cta-box p{color:var(--muted);margin-bottom:2rem}
+
+footer{border-top:1px solid rgba(63,63,70,.3);padding:2rem}
+.footer-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-inner span,.footer-inner a{font-size:.78rem;color:var(--muted);text-decoration:none}
+.footer-inner a:hover{color:var(--emerald)}
+
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity .7s,transform .7s}.fade-in.visible{opacity:1;transform:translateY(0)}.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--bg);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:1.5rem;color:var(--text);text-decoration:none;font-weight:700}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;font-size:2rem;color:var(--text);cursor:pointer}
+
+@media(max-width:1024px){.feat-grid,.pricing-grid{grid-template-columns:1fr 1fr}.app-body{grid-template-columns:1fr}}
+@media(max-width:768px){.nav-links,.nav-btns{display:none}.hamburger{display:flex}.feat-grid,.pricing-grid{grid-template-columns:1fr}.app-body{display:none}.app-body-mobile{display:block;padding:2rem;text-align:center;color:var(--muted);font-size:.9rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo"><div class="logo-icon">P</div>PlanSync</a>
+  <ul class="nav-links"><li><a href="#features">Fonctionnalités</a></li><li><a href="#pricing">Tarifs</a></li><li><a href="#faq">FAQ</a></li></ul>
+  <div class="nav-btns"><a href="#" class="nav-login">Connexion</a><a href="#" class="btn-em">Essai gratuit</a></div>
+  <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu"><button class="mobile-close" onclick="this.parentElement.classList.remove('open')">×</button><a href="#features" onclick="this.parentElement.classList.remove('open')">Fonctionnalités</a><a href="#pricing" onclick="this.parentElement.classList.remove('open')">Tarifs</a><a href="#faq" onclick="this.parentElement.classList.remove('open')">FAQ</a></div>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="pulse"></span> Nouveau : Intégration IA disponible</div>
+    <h1>Gérez vos projets,<br><span class="em">sans prise de tête</span></h1>
+    <p class="hero-sub">PlanSync remplace votre stack de 5 outils par un seul. Projets, tâches, discussions, docs et reporting — tout est là, en temps réel.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-big">Essayer gratuitement 14 jours →</a>
+      <a href="#" class="btn-ghost">Voir la démo</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item"><strong>2 400+</strong> équipes actives</div>
+      <div class="proof-item"><strong>4.8/5</strong> sur G2</div>
+      <div class="proof-item"><strong>-40%</strong> temps de gestion</div>
+    </div>
+  </div>
+</section>
+
+<div class="app-preview fade-in">
+  <div class="app-window">
+    <div class="app-bar"><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div></div>
+    <div class="app-body">
+      <div class="app-sidebar">
+        <div class="app-sidebar-item active">📋 Dashboard</div>
+        <div class="app-sidebar-item">📁 Projets</div>
+        <div class="app-sidebar-item">💬 Messages</div>
+        <div class="app-sidebar-item">📊 Rapports</div>
+        <div class="app-sidebar-item">⚙️ Settings</div>
+      </div>
+      <div class="app-main">
+        <div class="app-col-title">Sprint en cours — Semaine 12</div>
+        <div class="app-task">Refonte page pricing<div class="app-task-tag tag-green">En cours</div></div>
+        <div class="app-task">Intégration API Stripe<div class="app-task-tag tag-amber">Review</div></div>
+        <div class="app-task">Tests E2E onboarding<div class="app-task-tag tag-blue">Planifié</div></div>
+        <div class="app-task">Documentation API v2<div class="app-task-tag tag-green">En cours</div></div>
+      </div>
+      <div class="app-right">
+        <div class="app-stat-mini"><div class="val">87%</div><div class="lbl">Sprint progress</div></div>
+        <div class="app-stat-mini"><div class="val">12</div><div class="lbl">Tâches terminées</div></div>
+        <div class="app-stat-mini"><div class="val">3j</div><div class="lbl">Avant deadline</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="logos fade-in">
+  <p>Ils gèrent leurs projets avec PlanSync</p>
+  <div class="logos-row"><span>DOCTOLIB</span><span>ALAN</span><span>QONTO</span><span>SWILE</span><span>PAYFIT</span></div>
+</div>
+
+<section class="features" id="features">
+  <div class="fade-in"><div class="s-label">Fonctionnalités</div><h2 class="s-title">Tout ce qu'il faut,<br>rien de trop</h2><p class="s-sub">Fini le jonglage entre 5 outils. PlanSync centralise tout dans une interface claire et rapide.</p></div>
+  <div class="feat-grid">
+    <div class="feat-card fade-in d1"><div class="feat-icon">📋</div><h3>Boards & Kanban</h3><p>Visualisez vos projets en kanban, liste ou timeline. Drag & drop intuitif, filtres avancés, vues personnalisées.</p></div>
+    <div class="feat-card fade-in d2"><div class="feat-icon">💬</div><h3>Chat intégré</h3><p>Discussions contextuelles liées aux tâches et projets. Fini les messages perdus dans Slack. Tout est au bon endroit.</p></div>
+    <div class="feat-card fade-in d3"><div class="feat-icon">🤖</div><h3>Assistant IA</h3><p>Résumés automatiques, suggestions de priorités, rédaction de specs. L'IA qui accélère votre gestion de projet.</p></div>
+    <div class="feat-card fade-in d1"><div class="feat-icon">📊</div><h3>Reporting temps réel</h3><p>Dashboards automatiques : vélocité, burndown, charge équipe. Des données pour décider, pas pour décorer.</p></div>
+    <div class="feat-card fade-in d2"><div class="feat-icon">🔗</div><h3>100+ intégrations</h3><p>GitHub, Figma, Slack, Google Drive, Notion... Connectez vos outils existants en 2 clics.</p></div>
+    <div class="feat-card fade-in d3"><div class="feat-icon">🔒</div><h3>Sécurité & RGPD</h3><p>Données hébergées en France, SSO, 2FA, audit logs. Conforme RGPD et SOC2 Type II.</p></div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="pricing-inner">
+    <div class="fade-in"><div class="s-label">Tarifs</div><h2 class="s-title">Simple, transparent, sans surprise</h2></div>
+    <div class="pricing-grid">
+      <div class="price-card fade-in d1">
+        <div class="price-name">Starter</div>
+        <div class="price-amount">0€ <span>/mois</span></div>
+        <p class="price-desc">Pour les petites équipes qui démarrent.</p>
+        <ul class="price-features"><li>5 membres max</li><li>3 projets</li><li>Kanban & listes</li><li>Chat intégré</li></ul>
+        <a href="#" class="price-btn price-btn-outline">Commencer gratuitement</a>
+      </div>
+      <div class="price-card pop fade-in d2">
+        <div class="price-pop-badge">Populaire</div>
+        <div class="price-name">Pro</div>
+        <div class="price-amount">12€ <span>/utilisateur/mois</span></div>
+        <p class="price-desc">Pour les équipes qui veulent aller vite.</p>
+        <ul class="price-features"><li>Membres illimités</li><li>Projets illimités</li><li>Assistant IA</li><li>Reporting avancé</li><li>100+ intégrations</li></ul>
+        <a href="#" class="price-btn price-btn-fill">Essai gratuit 14 jours</a>
+      </div>
+      <div class="price-card fade-in d3">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount">Sur devis</div>
+        <p class="price-desc">Pour les organisations avec des besoins spécifiques.</p>
+        <ul class="price-features"><li>SSO / SAML</li><li>Support dédié</li><li>SLA garanti</li><li>Déploiement on-premise</li><li>Audit logs</li></ul>
+        <a href="#" class="price-btn price-btn-outline">Contacter l'équipe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="fade-in" style="text-align:center"><div class="s-label">FAQ</div><h2 class="s-title">Questions fréquentes</h2></div>
+  <div class="faq-list">
+    <div class="faq-item fade-in"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Puis-je migrer depuis Trello ou Asana ?</button><div class="faq-a"><div class="faq-a-inner">Oui ! Notre outil d'import permet de migrer vos boards Trello, projets Asana ou espaces Notion en quelques clics. Vos données, pièces jointes et historique sont préservés.</div></div></div>
+    <div class="faq-item fade-in d1"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Mes données sont-elles sécurisées ?</button><div class="faq-a"><div class="faq-a-inner">Toutes les données sont chiffrées et hébergées sur des serveurs en France (OVH). Nous sommes conformes RGPD et en cours de certification SOC2 Type II.</div></div></div>
+    <div class="faq-item fade-in d2"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">L'assistant IA a-t-il accès à mes données ?</button><div class="faq-a"><div class="faq-a-inner">L'IA fonctionne dans un environnement isolé. Vos données ne sont jamais utilisées pour entraîner des modèles. Vous gardez le contrôle total et pouvez désactiver l'IA à tout moment.</div></div></div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="cta-box fade-in">
+    <h2>Prêt à simplifier<br>votre gestion de projet ?</h2>
+    <p>14 jours gratuits. Aucune carte bancaire requise.</p>
+    <a href="#" class="btn-big">Démarrer gratuitement →</a>
+  </div>
+</section>
+
+<footer><div class="footer-inner"><span>© 2024 PlanSync</span><div style="display:flex;gap:1.5rem"><a href="#">Mentions légales</a><a href="#">CGU</a><a href="#">Confidentialité</a><a href="https://webcresson.com" target="_blank">Site par WCT Systems</a></div></div></footer>
+
+<script>
+const o=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>o.observe(el));
+</script>
+</body>
+</html>

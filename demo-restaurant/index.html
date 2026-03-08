@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Comptoir d'Émile — Restaurant bistronomique à Lyon</title>
+<meta name="description" content="Restaurant bistronomique au cœur de Lyon. Cuisine française revisitée, produits frais du marché. Réservation en ligne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --noir: #0a0a08;
+  --charcoal: #1a1a17;
+  --smoke: #2a2a25;
+  --warm-gray: #8a8578;
+  --cream: #e8e0d0;
+  --gold: #c8a855;
+  --gold-light: #dfc87a;
+  --gold-dark: #9a7d30;
+  --burgundy: #6b1d2a;
+  --burgundy-light: #8a3040;
+  --terracotta: #c0684a;
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--cream);
+  background: var(--noir);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* SUBTLE NOISE */
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 1.2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(10,10,8,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200,168,85,0.08);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--cream);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--warm-gray);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  color: var(--gold);
+  padding: 0.6rem 1.5rem;
+  border: 1px solid var(--gold);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--noir); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { width: 24px; height: 1.5px; background: var(--cream); border-radius: 2px; transition: all 0.3s; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(ellipse at 50% 30%, rgba(107,29,42,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 80%, rgba(200,168,85,0.08) 0%, transparent 50%);
+}
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-line {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 0 auto 2rem;
+  opacity: 0.6;
+}
+.hero-pre {
+  font-size: 0.82rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  color: var(--cream);
+  margin-bottom: 2rem;
+  letter-spacing: -0.03em;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--warm-gray);
+  max-width: 550px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.hero-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--gold);
+  color: var(--noir);
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(200,168,85,0.2); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 1px solid var(--warm-gray);
+  color: var(--cream);
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* DIVIDER */
+.divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 0;
+  color: var(--gold);
+  opacity: 0.3;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+}
+.divider::before, .divider::after {
+  content: '';
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* CONCEPT */
+.concept {
+  padding: 4rem 2rem 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+.concept-card {
+  padding: 2.5rem 2rem;
+  border: 1px solid rgba(200,168,85,0.1);
+  background: rgba(26,26,23,0.5);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+.concept-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(200,168,85,0.03) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.concept-card:hover { border-color: rgba(200,168,85,0.3); }
+.concept-card:hover::before { opacity: 1; }
+.concept-number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  opacity: 0.15;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.concept-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--cream);
+}
+.concept-card p {
+  font-size: 0.92rem;
+  color: var(--warm-gray);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* MENU SECTION */
+.menu-section {
+  padding: 6rem 2rem;
+  background: var(--charcoal);
+  position: relative;
+}
+.menu-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(ellipse at 20% 50%, rgba(107,29,42,0.1) 0%, transparent 50%);
+}
+.menu-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.section-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.section-sub {
+  font-size: 1rem;
+  color: var(--warm-gray);
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  font-weight: 300;
+}
+.menu-category {
+  margin-bottom: 3rem;
+  text-align: left;
+}
+.menu-category h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold);
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(200,168,85,0.15);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(200,168,85,0.05);
+}
+.menu-item-name {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--cream);
+}
+.menu-item-desc {
+  font-size: 0.82rem;
+  color: var(--warm-gray);
+  font-weight: 300;
+  margin-top: 0.2rem;
+}
+.menu-item-price {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+  margin-left: 2rem;
+}
+.menu-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+  font-style: italic;
+  margin-top: 2rem;
+  font-weight: 300;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+.testi-card {
+  padding: 2rem;
+  border: 1px solid rgba(200,168,85,0.08);
+  background: rgba(26,26,23,0.4);
+}
+.testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 1rem; }
+.testi-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--warm-gray);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+  font-weight: 300;
+}
+.testi-author { font-size: 0.88rem; font-weight: 600; color: var(--cream); }
+.testi-context { font-size: 0.78rem; color: var(--warm-gray); margin-top: 0.15rem; }
+
+/* CTA BANNER */
+.cta-banner {
+  padding: 6rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--burgundy) 0%, var(--noir) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 60vw; height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,85,0.08) 0%, transparent 70%);
+}
+.cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.cta-banner p {
+  font-size: 1.05rem;
+  color: var(--warm-gray);
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  font-weight: 300;
+  position: relative;
+  z-index: 2;
+}
+
+/* CONTACT */
+.contact {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.contact-form input, .contact-form textarea, .contact-form select {
+  padding: 1rem 1.2rem;
+  background: var(--charcoal);
+  border: 1px solid rgba(200,168,85,0.15);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--warm-gray); }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form select option { background: var(--charcoal); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.btn-submit-dark {
+  background: var(--gold);
+  color: var(--noir);
+  padding: 1rem 2rem;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-submit-dark:hover { background: var(--gold-light); }
+
+.contact-details { display: flex; flex-direction: column; gap: 2rem; }
+.contact-detail h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+.contact-detail p {
+  font-size: 0.9rem;
+  color: var(--warm-gray);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.contact-hours-dark {
+  border-top: 1px solid rgba(200,168,85,0.1);
+  padding-top: 1.5rem;
+}
+.hours-row-dark {
+  display: flex; justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.88rem;
+  border-bottom: 1px solid rgba(200,168,85,0.05);
+}
+.hours-row-dark .day { color: var(--cream); font-weight: 500; }
+.hours-row-dark .time { color: var(--warm-gray); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid rgba(200,168,85,0.08);
+  padding: 3rem 2rem;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-inner span {
+  font-size: 0.8rem;
+  color: var(--warm-gray);
+  font-weight: 300;
+}
+.footer-inner a {
+  color: var(--warm-gray);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.3s;
+}
+.footer-inner a:hover { color: var(--gold); }
+.footer-links { display: flex; gap: 1.5rem; }
+
+/* FADE */
+.fade-in {
+  opacity: 0; transform: translateY(25px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* MOBILE MENU */
+.mobile-menu {
+  display: none; position: fixed; top: 0; left: 0;
+  width: 100%; height: 100vh;
+  background: var(--noir);
+  z-index: 99;
+  flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--cream);
+  text-decoration: none;
+  font-weight: 400;
+}
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-close {
+  position: absolute; top: 1.5rem; right: 2rem;
+  background: none; border: none; font-size: 2rem; color: var(--cream); cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .concept-grid { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Le Comptoir <span>d'Émile</span></a>
+  <ul class="nav-links">
+    <li><a href="#concept">Concept</a></li>
+    <li><a href="#carte">La carte</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Réserver une table</a>
+  <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu">
+  <button class="mobile-close" onclick="this.parentElement.classList.remove('open')">×</button>
+  <a href="#concept" onclick="this.parentElement.classList.remove('open')">Concept</a>
+  <a href="#carte" onclick="this.parentElement.classList.remove('open')">La carte</a>
+  <a href="#avis" onclick="this.parentElement.classList.remove('open')">Avis</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-line"></div>
+    <div class="hero-pre">Restaurant bistronomique · Lyon 2e</div>
+    <h1>La cuisine <em>du marché,</em> sublimée</h1>
+    <p class="hero-sub">Chaque jour, le Chef Émile Marchand compose une carte vivante autour des plus beaux produits du marché Saint-Antoine. Une cuisine franche, généreuse, et profondément lyonnaise.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">Réserver une table</a>
+      <a href="#carte" class="btn-outline">Voir la carte</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider">✦ ✦ ✦</div>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div style="text-align:center; margin-bottom:3rem;" class="fade-in">
+    <div class="section-label">Notre philosophie</div>
+    <h2 class="section-title">Trois convictions,<br>un même engagement</h2>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card fade-in delay-1">
+      <div class="concept-number">01</div>
+      <h3>Le marché dicte la carte</h3>
+      <p>Chaque matin à 6h, Émile arpente le marché Saint-Antoine. Les produits du jour décident du menu. Pas de carte figée — uniquement ce que la saison offre de meilleur.</p>
+    </div>
+    <div class="concept-card fade-in delay-2">
+      <div class="concept-number">02</div>
+      <h3>L'artisan avant tout</h3>
+      <p>Nos producteurs sont nos partenaires : fromages de la Mère Richard, viandes de chez Sibilia, légumes du maraîcher Thierry Grange. Chaque fournisseur est choisi pour son excellence.</p>
+    </div>
+    <div class="concept-card fade-in delay-3">
+      <div class="concept-number">03</div>
+      <h3>La générosité lyonnaise</h3>
+      <p>La bistronomie, c'est le meilleur de la gastronomie sans le cérémonial. Des assiettes travaillées, des portions généreuses, un service chaleureux et une addition raisonnable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="carte">
+  <div class="menu-inner">
+    <div class="fade-in">
+      <div class="section-label">La carte</div>
+      <h2 class="section-title">Menu du moment</h2>
+      <p class="section-sub">Carte renouvelée chaque semaine selon les arrivages du marché.</p>
+    </div>
+    <div class="menu-category fade-in delay-1">
+      <h3>Entrées</h3>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Velouté de potimarron rôti</div>
+          <div class="menu-item-desc">Noisettes torréfiées, huile de truffe, crème ciboulette</div>
+        </div>
+        <div class="menu-item-price">14 €</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Terrine de campagne maison</div>
+          <div class="menu-item-desc">Cornichons, pickles d'oignon rouge, pain de campagne toasté</div>
+        </div>
+        <div class="menu-item-price">12 €</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Salade de lentilles vertes du Puy</div>
+          <div class="menu-item-desc">Cervelas de Lyon, vinaigrette moutarde à l'ancienne</div>
+        </div>
+        <div class="menu-item-price">13 €</div>
+      </div>
+    </div>
+    <div class="menu-category fade-in delay-2">
+      <h3>Plats</h3>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Quenelle de brochet sauce Nantua</div>
+          <div class="menu-item-desc">Riz pilaf, écrevisses du Bugey</div>
+        </div>
+        <div class="menu-item-price">24 €</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Filet de bœuf Charolais</div>
+          <div class="menu-item-desc">Jus corsé, gratin dauphinois, légumes du marché poêlés</div>
+        </div>
+        <div class="menu-item-price">32 €</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Dos de cabillaud snacké</div>
+          <div class="menu-item-desc">Risotto crémeux au parmesan, émulsion citronnée</div>
+        </div>
+        <div class="menu-item-price">26 €</div>
+      </div>
+    </div>
+    <div class="menu-category fade-in delay-3">
+      <h3>Desserts</h3>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Tarte Tatin revisitée</div>
+          <div class="menu-item-desc">Pommes caramélisées, glace vanille de Madagascar</div>
+        </div>
+        <div class="menu-item-price">11 €</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-item-name">Praluline tiède</div>
+          <div class="menu-item-desc">Crème anglaise, éclats de pralines roses de Lyon</div>
+        </div>
+        <div class="menu-item-price">12 €</div>
+      </div>
+    </div>
+    <p class="menu-note fade-in">Menu déjeuner entrée + plat ou plat + dessert : 22 € · Menu complet : 28 €</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="avis">
+  <div class="fade-in">
+    <div class="section-label">Ce qu'ils en disent</div>
+    <h2 class="section-title">Nos clients parlent de nous</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-in delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Une quenelle de brochet absolument incroyable. Le service est impeccable et l'ambiance chaleureuse. On se sent comme chez un ami qui cuisine divinement bien.</p>
+      <div class="testi-author">Laurent P.</div>
+      <div class="testi-context">Dîner en couple, Octobre 2024</div>
+    </div>
+    <div class="testi-card fade-in delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Le menu déjeuner est un rapport qualité-prix imbattable à Lyon. Des produits frais, une cuisson parfaite, et un accueil souriant. Notre cantine du vendredi !</p>
+      <div class="testi-author">Marie-Claire D.</div>
+      <div class="testi-context">Déjeuner d'affaires, régulière</div>
+    </div>
+    <div class="testi-card fade-in delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Nous avons privatisé la salle pour un anniversaire (30 personnes). Le menu était sur-mesure et chaque plat était une merveille. Émile est venu saluer chaque table.</p>
+      <div class="testi-author">Fabien R.</div>
+      <div class="testi-context">Événement privé, Septembre 2024</div>
+    </div>
+    <div class="testi-card fade-in delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">La carte des vins est remarquable — beaucoup de références de la vallée du Rhône à prix doux. Le sommelier conseille avec passion sans pousser à la dépense.</p>
+      <div class="testi-author">Jean-Marc T.</div>
+      <div class="testi-context">Amateur de vin, Novembre 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <h2 class="fade-in">Votre table vous attend</h2>
+  <p class="fade-in delay-1">Réservez en ligne ou appelez-nous directement. Privatisation possible pour vos événements jusqu'à 40 couverts.</p>
+  <a href="#contact" class="btn-gold fade-in delay-2">Réserver maintenant</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div style="text-align:center;" class="fade-in">
+    <div class="section-label">Réservation</div>
+    <h2 class="section-title">Réservez votre table</h2>
+    <p class="section-sub" style="margin:0 auto 3rem;">Réservation conseillée, surtout le week-end. Nous accueillons jusqu'à 45 couverts.</p>
+  </div>
+  <div class="contact-grid">
+    <form class="contact-form fade-in delay-1" onsubmit="event.preventDefault(); alert('Réservation envoyée !');">
+      <div class="form-row">
+        <input type="text" placeholder="Nom" required>
+        <input type="tel" placeholder="Téléphone" required>
+      </div>
+      <div class="form-row">
+        <input type="date" required>
+        <select>
+          <option>12h00</option>
+          <option>12h30</option>
+          <option>13h00</option>
+          <option>19h30</option>
+          <option>20h00</option>
+          <option>20h30</option>
+          <option>21h00</option>
+        </select>
+      </div>
+      <select>
+        <option>2 personnes</option>
+        <option>3 personnes</option>
+        <option>4 personnes</option>
+        <option>5 personnes</option>
+        <option>6 personnes</option>
+        <option>7+ personnes (nous contacter)</option>
+      </select>
+      <textarea placeholder="Allergies, demandes particulières..."></textarea>
+      <button type="submit" class="btn-submit-dark">Confirmer la réservation</button>
+    </form>
+    <div class="contact-details fade-in delay-2">
+      <div class="contact-detail">
+        <h4>Adresse</h4>
+        <p>18 rue Mercière<br>69002 Lyon</p>
+      </div>
+      <div class="contact-detail">
+        <h4>Téléphone</h4>
+        <p>04 78 XX XX XX</p>
+      </div>
+      <div class="contact-detail">
+        <h4>Email</h4>
+        <p>reservation@comptoir-emile.fr</p>
+      </div>
+      <div class="contact-hours-dark">
+        <h4 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:0.8rem;">Horaires</h4>
+        <div class="hours-row-dark"><span class="day">Lundi</span><span class="time">Fermé</span></div>
+        <div class="hours-row-dark"><span class="day">Mardi – Vendredi</span><span class="time">12h–14h · 19h30–22h30</span></div>
+        <div class="hours-row-dark"><span class="day">Samedi</span><span class="time">19h30–23h</span></div>
+        <div class="hours-row-dark"><span class="day">Dimanche</span><span class="time">12h–14h30</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2024 Le Comptoir d'Émile. Lyon.</span>
+    <div class="footer-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="https://webcresson.com" target="_blank">Site par WCT Systems</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Le Comptoir d'Émile",
+  "description": "Restaurant bistronomique au cœur de Lyon. Cuisine française revisitée, produits frais du marché Saint-Antoine.",
+  "url": "https://demo-restaurant.webcresson.com",
+  "telephone": "+33478000000",
+  "servesCuisine": "French",
+  "priceRange": "€€",
+  "address": { "@type": "PostalAddress", "streetAddress": "18 rue Mercière", "addressLocality": "Lyon", "postalCode": "69002", "addressCountry": "FR" }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martin Plomberie — Plombier chauffagiste à Marseille | Urgence 7j/7</title>
+<meta name="description" content="Plombier chauffagiste à Marseille et alentours. Dépannage d'urgence 7j/7, installation, rénovation. Devis gratuit en 1h. Artisan certifié RGE.">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f5f7fa;--surface:#fff;--navy:#0f172a;--navy-light:#1e293b;--blue:#2563eb;--blue-light:#60a5fa;--blue-pale:#dbeafe;--orange:#f97316;--orange-pale:#ffedd5;--slate:#64748b;--font:'Rubik',sans-serif}
+html{scroll-behavior:smooth}body{font-family:var(--font);color:var(--navy);background:var(--bg);overflow-x:hidden;line-height:1.6}
+
+nav{position:fixed;top:0;width:100%;z-index:100;padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;background:var(--navy);color:#fff}
+.logo{font-size:1.3rem;font-weight:800;color:#fff;text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.logo-icon{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.7);font-size:.85rem;font-weight:500;transition:color .3s}
+.nav-links a:hover{color:#fff}
+.nav-phone{display:flex;align-items:center;gap:.5rem;background:var(--orange);color:#fff;padding:.5rem 1.2rem;border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:700}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px}
+
+.hero{padding:6rem 2rem 4rem;background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(135deg,transparent 30%,var(--blue) 100%);opacity:.1}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center;position:relative;z-index:2}
+.hero-urgent{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .8rem;background:var(--orange);border-radius:4px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem;animation:pulse-bg 2s infinite}
+@keyframes pulse-bg{0%,100%{opacity:1}50%{opacity:.8}}
+.hero h1{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:1rem;letter-spacing:-.02em}
+.hero-text{font-size:1rem;color:rgba(255,255,255,.7);max-width:480px;margin-bottom:2rem;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-orange{background:var(--orange);color:#fff;padding:.9rem 2rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.9rem;transition:all .3s}
+.btn-orange:hover{background:#ea580c;transform:translateY(-2px)}
+.btn-white-o{border:2px solid rgba(255,255,255,.3);color:#fff;padding:.9rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .3s}
+.btn-white-o:hover{border-color:#fff}
+.hero-trust{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.hero-trust-item{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:rgba(255,255,255,.6);font-weight:500}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.h-stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5rem;text-align:center}
+.h-stat-card .num{font-size:2rem;font-weight:800;color:var(--orange)}
+.h-stat-card .lbl{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:.2rem}
+
+.services{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.s-label{font-size:.78rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem}
+.s-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;margin-bottom:2.5rem}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.srv-card{background:var(--surface);border:1px solid #e2e8f0;border-radius:12px;padding:1.8rem;transition:all .3s}
+.srv-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(15,23,42,.06);border-color:var(--blue-light)}
+.srv-icon{width:48px;height:48px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem}
+.srv-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
+.srv-card p{font-size:.85rem;color:var(--slate);line-height:1.5}
+
+.why{padding:5rem 2rem;background:var(--navy);color:#fff}
+.why-inner{max-width:1000px;margin:0 auto;text-align:center}
+.why .s-label{color:var(--orange)}
+.why .s-title{color:#fff}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2rem;text-align:center}
+.why-item .icon{font-size:2rem;margin-bottom:.6rem}
+.why-item h4{font-size:.9rem;font-weight:700;margin-bottom:.3rem}
+.why-item p{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.4}
+
+.contact{padding:5rem 2rem;max-width:1000px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.contact-form input,.contact-form textarea,.contact-form select{padding:.85rem 1.1rem;border:1.5px solid #e2e8f0;border-radius:10px;font-family:var(--font);font-size:.9rem;outline:none;transition:border-color .3s}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--blue)}
+.contact-form textarea{min-height:100px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-sub-o{background:var(--orange);color:#fff;padding:.9rem;border:none;border-radius:8px;font-family:var(--font);font-size:.9rem;font-weight:700;cursor:pointer;transition:all .3s}
+.btn-sub-o:hover{background:#ea580c}
+.contact-info{display:flex;flex-direction:column;gap:1.2rem}
+.ci{background:var(--blue-pale);border-radius:10px;padding:1.2rem;display:flex;gap:.8rem}
+.ci-icon{font-size:1.2rem;flex-shrink:0}
+.ci h4{font-size:.88rem;font-weight:700;margin-bottom:.2rem}
+.ci p{font-size:.85rem;color:var(--slate)}
+.ci-urgent{background:var(--orange-pale);border:1px solid var(--orange)}
+.ci-urgent h4{color:var(--orange)}
+
+footer{background:var(--navy);color:#fff;padding:3rem 2rem 2rem}
+.footer-inner{max-width:1000px;margin:0 auto}
+.footer-bottom{display:flex;justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:.5rem}
+.footer-bottom a{color:rgba(255,255,255,.5);text-decoration:none}.footer-bottom a:hover{color:var(--orange)}
+
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}.fade-in.visible{opacity:1;transform:translateY(0)}.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--navy);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}.mobile-menu a{font-size:1.3rem;color:#fff;text-decoration:none;font-weight:600}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;font-size:2rem;color:#fff;cursor:pointer}
+@media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.srv-grid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.nav-links,.nav-phone{display:none}.hamburger{display:flex}.srv-grid,.why-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<nav><a href="#" class="logo"><div class="logo-icon">🔧</div>Martin Plomberie</a><ul class="nav-links"><li><a href="#services">Services</a></li><li><a href="#pourquoi">Pourquoi nous</a></li><li><a href="#contact">Contact</a></li></ul><a href="tel:+33491000000" class="nav-phone">📞 04 91 XX XX XX</a><button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')"><span></span><span></span><span></span></button></nav>
+<div class="mobile-menu"><button class="mobile-close" onclick="this.parentElement.classList.remove('open')">×</button><a href="#services" onclick="this.parentElement.classList.remove('open')">Services</a><a href="#pourquoi" onclick="this.parentElement.classList.remove('open')">Pourquoi nous</a><a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a><a href="tel:+33491000000" style="color:var(--orange)" onclick="this.parentElement.classList.remove('open')">📞 Appeler</a></div>
+
+<section class="hero"><div class="hero-inner"><div>
+  <div class="hero-urgent fade-in">⚡ Urgence — intervention en 45 min</div>
+  <h1 class="fade-in">Plombier chauffagiste à Marseille, dépannage 7j/7</h1>
+  <p class="hero-text fade-in d1">Fuite d'eau, chaudière en panne, WC bouchés ? David Martin et son équipe interviennent en urgence dans tout Marseille et ses arrondissements. Artisan certifié RGE.</p>
+  <div class="hero-btns fade-in d2"><a href="tel:+33491000000" class="btn-orange">📞 Appeler maintenant</a><a href="#contact" class="btn-white-o">Devis gratuit en ligne</a></div>
+  <div class="hero-trust fade-in d3"><div class="hero-trust-item">✅ Certifié RGE</div><div class="hero-trust-item">⭐ 4.8/5 Google</div><div class="hero-trust-item">🛡️ Garantie décennale</div></div>
+</div><div class="hero-stats">
+  <div class="h-stat-card fade-in d1"><div class="num">18 ans</div><div class="lbl">D'expérience</div></div>
+  <div class="h-stat-card fade-in d2"><div class="num">45 min</div><div class="lbl">Délai d'intervention</div></div>
+  <div class="h-stat-card fade-in d3"><div class="num">4 800+</div><div class="lbl">Interventions / an</div></div>
+  <div class="h-stat-card fade-in d3"><div class="num">4.8/5</div><div class="lbl">Note Google (320 avis)</div></div>
+</div></div></section>
+
+<section class="services" id="services"><div class="fade-in"><div class="s-label">Nos services</div><h2 class="s-title">Plomberie, chauffage & sanitaire</h2></div>
+  <div class="srv-grid">
+    <div class="srv-card fade-in d1"><div class="srv-icon">🚰</div><h3>Dépannage d'urgence</h3><p>Fuites, canalisations bouchées, dégâts des eaux. Intervention en 45 min, 7j/7, jours fériés inclus.</p></div>
+    <div class="srv-card fade-in d2"><div class="srv-icon">🔥</div><h3>Chauffage & Chaudières</h3><p>Installation, entretien et réparation de chaudières gaz, pompes à chaleur, planchers chauffants. Certifié RGE.</p></div>
+    <div class="srv-card fade-in d3"><div class="srv-icon">🚿</div><h3>Salle de bain</h3><p>Rénovation complète, remplacement baignoire/douche, création salle de bain PMR. Devis détaillé gratuit.</p></div>
+    <div class="srv-card fade-in d1"><div class="srv-icon">🏗️</div><h3>Installation neuve</h3><p>Plomberie complète pour construction neuve ou rénovation. Cuivre, PER, multicouche. Aux normes DTU.</p></div>
+    <div class="srv-card fade-in d2"><div class="srv-icon">🌡️</div><h3>Contrat d'entretien</h3><p>Entretien annuel chaudière (obligatoire). Contrat à partir de 120€/an. Priorité dépannage incluse.</p></div>
+    <div class="srv-card fade-in d3"><div class="srv-icon">💧</div><h3>Adoucisseur & Traitement eau</h3><p>Installation d'adoucisseurs, filtres anti-calcaire, osmoseurs. Prolongez la durée de vie de vos équipements.</p></div>
+  </div>
+</section>
+
+<section class="why" id="pourquoi"><div class="why-inner"><div class="fade-in"><div class="s-label">Pourquoi nous choisir</div><h2 class="s-title">Un artisan de confiance</h2></div>
+  <div class="why-grid">
+    <div class="why-item fade-in d1"><div class="icon">⏱️</div><h4>Rapide</h4><p>Intervention en 45 min sur Marseille. Disponible 7j/7.</p></div>
+    <div class="why-item fade-in d2"><div class="icon">💰</div><h4>Transparent</h4><p>Devis gratuit avant intervention. Pas de mauvaise surprise.</p></div>
+    <div class="why-item fade-in d3"><div class="icon">🛡️</div><h4>Garanti</h4><p>Garantie décennale et assurance RC Pro. Certifié RGE Qualibat.</p></div>
+    <div class="why-item fade-in d3"><div class="icon">🧹</div><h4>Propre</h4><p>Chantier propre, respect de votre intérieur. Nettoyage systématique après intervention.</p></div>
+  </div>
+</div></section>
+
+<section class="contact" id="contact"><div class="fade-in" style="text-align:center"><div class="s-label">Contact</div><h2 class="s-title">Devis gratuit en 1h</h2></div>
+  <div class="contact-grid">
+    <form class="contact-form fade-in d1" onsubmit="event.preventDefault();alert('Devis demandé !')"><div class="form-row"><input type="text" placeholder="Nom" required><input type="tel" placeholder="Téléphone" required></div><input type="text" placeholder="Adresse d'intervention"><select><option>Urgence (fuite, panne)</option><option>Installation chaudière</option><option>Rénovation salle de bain</option><option>Entretien annuel</option><option>Autre</option></select><textarea placeholder="Décrivez votre problème..."></textarea><button type="submit" class="btn-sub-o">Demander un devis gratuit →</button></form>
+    <div class="contact-info fade-in d2">
+      <div class="ci ci-urgent"><div class="ci-icon">🚨</div><div><h4>Urgence 7j/7</h4><p>04 91 XX XX XX<br>Intervention en 45 min sur Marseille</p></div></div>
+      <div class="ci"><div class="ci-icon">📍</div><div><h4>Zone d'intervention</h4><p>Marseille (tous arrondissements)<br>Aix-en-Provence, Aubagne, La Ciotat</p></div></div>
+      <div class="ci"><div class="ci-icon">🕐</div><div><h4>Horaires</h4><p>Lun–Sam : 7h–20h<br>Urgences : 24h/24, 7j/7</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="footer-inner"><div class="footer-bottom"><span>© 2024 Martin Plomberie — SIRET 123 456 789 00012 — RGE Qualibat</span><div style="display:flex;gap:1rem"><a href="#">Mentions légales</a><a href="https://webcresson.com" target="_blank">Site par WCT Systems</a></div></div></div></footer>
+<script>const o=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-in').forEach(el=>o.observe(el));</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Plumber","name":"Martin Plomberie","description":"Plombier chauffagiste à Marseille. Dépannage urgence 7j/7, installation, rénovation.","telephone":"+33491000000","address":{"@type":"PostalAddress","addressLocality":"Marseille","postalCode":"13000","addressCountry":"FR"},"priceRange":"€€","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"07:00","closes":"20:00"}}</script>
+</body>
+</html>

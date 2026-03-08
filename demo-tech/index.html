@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neovolt — Transformation digitale & IA pour PME et ETI</title>
+<meta name="description" content="Cabinet de conseil en transformation digitale et intelligence artificielle. Nous accélérons la croissance des PME et ETI françaises grâce à la tech.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050508;--surface:#0e0e14;--surface-2:#16161f;--border:rgba(139,92,246,0.1);
+  --text:#e2e0ec;--muted:#8a86a0;--white:#ffffff;
+  --violet:#8b5cf6;--violet-bright:#a78bfa;--violet-glow:rgba(139,92,246,0.15);
+  --cyan:#22d3ee;--cyan-glow:rgba(34,211,238,0.1);
+  --lime:#a3e635;--lime-glow:rgba(163,230,53,0.1);
+  --font-display:'Syne',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--text);background:var(--bg);overflow-x:hidden;line-height:1.6}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,8,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--white);text-decoration:none;letter-spacing:-0.03em}
+.nav-logo span{background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.85rem;font-weight:500;transition:color 0.3s}
+.nav-links a:hover{color:var(--violet-bright)}
+.nav-cta{background:var(--violet);color:var(--white);padding:0.6rem 1.5rem;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;transition:all 0.3s}
+.nav-cta:hover{background:var(--violet-bright);box-shadow:0 0 30px var(--violet-glow)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);width:80vw;height:80vw;border-radius:50%;background:radial-gradient(circle,var(--violet-glow) 0%,transparent 60%);opacity:0.5}
+.hero::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--violet),var(--cyan),transparent)}
+.hero-content{position:relative;z-index:2;max-width:850px}
+.hero-tag{display:inline-flex;align-items:center;gap:0.6rem;padding:0.4rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:0.78rem;font-weight:600;color:var(--violet-bright);margin-bottom:2rem}
+.hero-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-family:var(--font-display);font-size:clamp(3rem,6vw,5.5rem);font-weight:800;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.04em}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.15rem;color:var(--muted);max-width:600px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-gradient{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,var(--violet),#7c3aed);color:var(--white);padding:1rem 2.2rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.9rem;transition:all 0.3s;box-shadow:0 4px 20px var(--violet-glow)}
+.btn-gradient:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(139,92,246,0.3)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;border:1px solid var(--border);color:var(--text);padding:1rem 2.2rem;border-radius:10px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.3s}
+.btn-ghost:hover{border-color:var(--violet);color:var(--violet-bright)}
+
+.metrics{padding:4rem 2rem;border-bottom:1px solid var(--border)}
+.metrics-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap}
+.metric{text-align:center}
+.metric-num{font-family:var(--font-display);font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,var(--violet-bright),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.metric-label{font-size:0.82rem;color:var(--muted);margin-top:0.2rem}
+
+.section-label{font-size:0.75rem;font-weight:700;color:var(--violet-bright);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:0.6rem}
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;color:var(--white);margin-bottom:0.8rem;letter-spacing:-0.03em}
+.section-sub{font-size:1rem;color:var(--muted);max-width:550px}
+
+.services{padding:6rem 2rem;max-width:1200px;margin:0 auto}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all 0.4s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,var(--violet-glow),transparent);opacity:0;transition:opacity 0.4s}
+.service-card:hover{border-color:rgba(139,92,246,0.3);transform:translateY(-4px)}
+.service-card:hover::before{opacity:1}
+.service-card *{position:relative;z-index:2}
+.service-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.2rem;background:var(--surface-2);border:1px solid var(--border)}
+.service-card h3{font-family:var(--font-display);font-size:1.15rem;font-weight:700;margin-bottom:0.5rem;color:var(--white)}
+.service-card p{font-size:0.88rem;color:var(--muted);line-height:1.6}
+.service-tag{display:inline-block;margin-top:1rem;padding:0.25rem 0.8rem;background:var(--surface-2);border:1px solid var(--border);border-radius:100px;font-size:0.72rem;color:var(--violet-bright);font-weight:600}
+
+.process{padding:6rem 2rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.process-inner{max-width:1000px;margin:0 auto}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem;position:relative}
+.process-steps::before{content:'';position:absolute;top:32px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,var(--violet),var(--cyan));opacity:0.2}
+.step{text-align:center;position:relative}
+.step-num{width:64px;height:64px;border-radius:16px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--violet-bright)}
+.step h4{font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.4rem}
+.step p{font-size:0.82rem;color:var(--muted);line-height:1.5}
+
+.testimonials{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem}
+.testi-text{font-size:0.92rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;font-style:italic}
+.testi-author{font-weight:600;font-size:0.88rem;color:var(--white)}
+.testi-role{font-size:0.78rem;color:var(--muted);margin-top:0.1rem}
+
+.cta-section{padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,var(--violet-glow) 0%,transparent 60%)}
+.cta-box{max-width:700px;margin:0 auto;position:relative;z-index:2;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3rem 2rem}
+.cta-box h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:var(--white);margin-bottom:0.8rem}
+.cta-box p{color:var(--muted);margin-bottom:2rem}
+
+.contact{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.contact-form input,.contact-form textarea,.contact-form select{padding:0.9rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:0.9rem;outline:none;transition:border-color 0.3s}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--muted)}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--violet)}
+.contact-form textarea{min-height:110px;resize:vertical}
+.contact-form select option{background:var(--surface)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-submit-v{background:linear-gradient(135deg,var(--violet),#7c3aed);color:var(--white);padding:0.9rem 2rem;border:none;border-radius:10px;font-family:var(--font-body);font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.3s}
+.btn-submit-v:hover{box-shadow:0 8px 30px var(--violet-glow);transform:translateY(-2px)}
+.contact-info{display:flex;flex-direction:column;gap:2rem}
+.contact-item h4{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.3rem}
+.contact-item p{font-size:0.88rem;color:var(--muted)}
+.contact-item a{color:var(--violet-bright);text-decoration:none}
+
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-inner span,.footer-inner a{font-size:0.78rem;color:var(--muted);text-decoration:none}
+.footer-inner a:hover{color:var(--violet-bright)}
+.footer-links{display:flex;gap:1.5rem}
+
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity 0.7s,transform 0.7s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}
+
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--bg);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--font-display);font-size:1.8rem;color:var(--white);text-decoration:none;font-weight:700}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;font-size:2rem;color:var(--white);cursor:pointer}
+
+@media(max-width:1024px){.services-grid{grid-template-columns:1fr 1fr}.process-steps{grid-template-columns:1fr 1fr}.testi-grid,.contact-grid{grid-template-columns:1fr}}
+@media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links,.nav-cta{display:none}.hamburger{display:flex}.services-grid,.process-steps{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.metrics-inner{gap:2rem}.footer-inner{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">neo<span>volt</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#temoignages">Témoignages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Audit gratuit</a>
+  <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu">
+  <button class="mobile-close" onclick="this.parentElement.classList.remove('open')">×</button>
+  <a href="#services" onclick="this.parentElement.classList.remove('open')">Services</a>
+  <a href="#methode" onclick="this.parentElement.classList.remove('open')">Méthode</a>
+  <a href="#temoignages" onclick="this.parentElement.classList.remove('open')">Témoignages</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+</div>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag"><span class="dot"></span>Nouveau : Audit IA offert pour les PME</div>
+    <h1>Votre entreprise,<br><span class="gradient">dopée à l'IA</span></h1>
+    <p class="hero-sub">Neovolt accompagne les PME et ETI françaises dans leur transformation digitale. Automatisation, IA, data — nous transformons vos process en avantages compétitifs concrets.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gradient">Réserver un audit gratuit →</a>
+      <a href="#services" class="btn-ghost">Découvrir nos services</a>
+    </div>
+  </div>
+</section>
+
+<div class="metrics">
+  <div class="metrics-inner">
+    <div class="metric fade-in"><div class="metric-num">120+</div><div class="metric-label">PME accompagnées</div></div>
+    <div class="metric fade-in delay-1"><div class="metric-num">35%</div><div class="metric-label">Gain productivité moyen</div></div>
+    <div class="metric fade-in delay-2"><div class="metric-num">8M€</div><div class="metric-label">Économisés par nos clients</div></div>
+    <div class="metric fade-in delay-3"><div class="metric-num">4.9/5</div><div class="metric-label">Satisfaction client</div></div>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="fade-in">
+    <div class="section-label">Nos services</div>
+    <h2 class="section-title">La tech au service de votre croissance</h2>
+    <p class="section-sub">Des solutions concrètes et mesurables, pas du PowerPoint.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in delay-1">
+      <div class="service-icon">🤖</div>
+      <h3>Intégration IA</h3>
+      <p>Chatbots internes, automatisation de tâches répétitives, analyse de documents, génération de contenu. L'IA adaptée à VOS process métier.</p>
+      <span class="service-tag">ROI en 3 mois</span>
+    </div>
+    <div class="service-card fade-in delay-2">
+      <div class="service-icon">⚡</div>
+      <h3>Automatisation RPA</h3>
+      <p>Saisie de données, facturation, reporting, relances — on automatise vos tâches chronophages pour libérer vos équipes sur la valeur ajoutée.</p>
+      <span class="service-tag">-60% temps admin</span>
+    </div>
+    <div class="service-card fade-in delay-3">
+      <div class="service-icon">📊</div>
+      <h3>Dashboards & Data</h3>
+      <p>Tableaux de bord temps réel connectés à vos outils (CRM, ERP, comptabilité). Prenez des décisions basées sur la donnée, pas sur l'intuition.</p>
+      <span class="service-tag">Données en temps réel</span>
+    </div>
+    <div class="service-card fade-in delay-1">
+      <div class="service-icon">🌐</div>
+      <h3>Sites web & Apps</h3>
+      <p>Sites vitrines performants, applications métier sur-mesure, PWA. Stack moderne (Next.js, React) optimisée SEO et conversion.</p>
+      <span class="service-tag">Lighthouse 95+</span>
+    </div>
+    <div class="service-card fade-in delay-2">
+      <div class="service-icon">🔍</div>
+      <h3>Prospection B2B</h3>
+      <p>Système de prospection automatisé et enrichi par IA. Identification de leads qualifiés, scoring intelligent, messages personnalisés à grande échelle.</p>
+      <span class="service-tag">3x plus de leads</span>
+    </div>
+    <div class="service-card fade-in delay-3">
+      <div class="service-icon">🛡️</div>
+      <h3>Audit & Conseil</h3>
+      <p>Diagnostic complet de votre maturité digitale. Plan d'action priorisé avec ROI estimé par chantier. Accompagnement de A à Z.</p>
+      <span class="service-tag">Audit offert</span>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="methode">
+  <div class="process-inner">
+    <div class="fade-in" style="text-align:center">
+      <div class="section-label">Notre méthode</div>
+      <h2 class="section-title">4 étapes, des résultats concrets</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step fade-in delay-1"><div class="step-num">01</div><h4>Audit gratuit</h4><p>Analyse de vos process, outils et pain points. Identification des quick wins.</p></div>
+      <div class="step fade-in delay-2"><div class="step-num">02</div><h4>Feuille de route</h4><p>Plan d'action priorisé avec estimation de ROI par chantier. Validation ensemble.</p></div>
+      <div class="step fade-in delay-3"><div class="step-num">03</div><h4>Implémentation</h4><p>Développement et déploiement itératif. Résultats visibles dès les premières semaines.</p></div>
+      <div class="step fade-in delay-4"><div class="step-num">04</div><h4>Optimisation</h4><p>Suivi des KPIs, ajustements continus, formation de vos équipes pour l'autonomie.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="temoignages">
+  <div class="fade-in" style="text-align:center">
+    <div class="section-label">Témoignages</div>
+    <h2 class="section-title">Ils ont accéléré avec nous</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-in delay-1">
+      <p class="testi-text">Neovolt a automatisé notre process de facturation et de relance. On a économisé 2 jours par semaine de travail administratif. Le ROI était visible dès le premier mois.</p>
+      <div class="testi-author">Pierre V.</div>
+      <div class="testi-role">DG, Transport Express 77 (PME, 45 salariés)</div>
+    </div>
+    <div class="testi-card fade-in delay-2">
+      <p class="testi-text">L'intégration IA dans notre service client a transformé notre réactivité. Les réponses sont 3x plus rapides et la satisfaction client a bondi de 72% à 94%.</p>
+      <div class="testi-author">Amina K.</div>
+      <div class="testi-role">Directrice ops, MediFrance (ETI, 280 salariés)</div>
+    </div>
+    <div class="testi-card fade-in delay-1">
+      <p class="testi-text">Le dashboard commercial qu'ils ont construit nous donne enfin une vision claire en temps réel. Avant, on attendait la fin du mois pour savoir où on en était.</p>
+      <div class="testi-author">Marc D.</div>
+      <div class="testi-role">CEO, AgriTech Solutions (PME, 22 salariés)</div>
+    </div>
+    <div class="testi-card fade-in delay-2">
+      <p class="testi-text">Leur approche pragmatique nous a convaincu. Pas de jargon, pas de slides inutiles — juste des résultats. Notre pipeline de prospection a triplé en 6 mois.</p>
+      <div class="testi-author">Sophie M.</div>
+      <div class="testi-role">Fondatrice, Cabinet Innova Conseil (EI)</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-box fade-in">
+    <h2>Prêt à passer à la vitesse supérieure ?</h2>
+    <p>Réservez votre audit digital gratuit. 30 minutes pour identifier vos leviers de croissance.</p>
+    <a href="#contact" class="btn-gradient">Réserver mon audit gratuit →</a>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="fade-in" style="text-align:center">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Parlons de votre projet</h2>
+    <p class="section-sub" style="margin:0.5rem auto 0">Audit gratuit de 30 min · Sans engagement · Résultats concrets</p>
+  </div>
+  <div class="contact-grid">
+    <form class="contact-form fade-in delay-1" onsubmit="event.preventDefault();alert('Demande envoyée !')">
+      <div class="form-row"><input type="text" placeholder="Nom" required><input type="text" placeholder="Entreprise" required></div>
+      <div class="form-row"><input type="email" placeholder="Email pro" required><input type="tel" placeholder="Téléphone"></div>
+      <select><option>Intégration IA</option><option>Automatisation RPA</option><option>Dashboard & Data</option><option>Site web / App</option><option>Prospection B2B</option><option>Audit digital complet</option><option>Autre</option></select>
+      <textarea placeholder="Décrivez brièvement votre besoin ou challenge..."></textarea>
+      <button type="submit" class="btn-submit-v">Envoyer ma demande →</button>
+    </form>
+    <div class="contact-info fade-in delay-2">
+      <div class="contact-item"><h4>Bureau</h4><p>Montigny-le-Bretonneux<br>78180, Yvelines</p></div>
+      <div class="contact-item"><h4>Email</h4><p><a href="#">contact@neovolt.fr</a></p></div>
+      <div class="contact-item"><h4>Téléphone</h4><p><a href="#">01 30 XX XX XX</a></p></div>
+      <div class="contact-item"><h4>Horaires</h4><p>Lundi — Vendredi : 9h – 18h<br>Visio disponible partout en France</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2024 Neovolt — Transformation digitale & IA</span>
+    <div class="footer-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="https://webcresson.com" target="_blank">Site par WCT Systems</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Neovolt","description":"Cabinet de conseil en transformation digitale et intelligence artificielle pour PME et ETI.","url":"https://demo-tech.webcresson.com","address":{"@type":"PostalAddress","addressLocality":"Montigny-le-Bretonneux","postalCode":"78180","addressCountry":"FR"}}
+</script>
+</body>
+</html>
